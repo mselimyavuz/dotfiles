@@ -1,0 +1,12 @@
+/proc/*
+/sys/*
+/dev/*
+/run/*
+/mnt/*
+/tmp/*
+/var/tmp/*
+/var/run/*
+/home/*/.cache/*
+/usr/portage/distfiles/*
+/usr/portage/packages/*
+/home/mselimyavuz/workspace/main/Music/*

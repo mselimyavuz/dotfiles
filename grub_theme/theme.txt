@@ -1,0 +1,29 @@
+title-text: ""
+desktop-image: "background.png"
+desktop-color: "#000000"
+terminal-font: "Iosevka Term Regular 36"
+
++ boot_menu {
+    left = 20%
+    width = 60%
+    top = 45%
+    height = 40%
+    item_font = "Iosevka Term Regular 36"
+    item_color = "#7a5baf"
+    selected_item_color = "#ddbbff"
+    selected_item_pixmap_style = "selection_bar.png"
+    item_height = 80
+    item_padding = 20
+    item_spacing = 15
+}
+
++ label {
+    top = 90%
+    left = 0
+    width = 100%
+    align = "center"
+    id = "timeout_layout"
+    text = "Gentoo Linux will boot in %d seconds"
+    color = "#7a5baf"
+    font = "Iosevka Term Regular 24"
+}
