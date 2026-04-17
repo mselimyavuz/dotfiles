@@ -138,7 +138,7 @@ bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5%+
 
 # Screenshots
 bindsym Print exec --no-startup-id maim -s | xclip -selection clipboard -t image/png && notify-send "Screenshot" "Region copied"
-bindsym Shift+Print exec --no-startup-id maim -s ~/Downloads/screenshot-$(date +%Y%m%d-%H%M%S).png
+bindsym Shift+Print exec --no-startup-id maim -s ~/Downloads/screenshot-$(date +%Y%m%d-%H%M%S).png && notify-send "Screenshot" "Region saved to ~/Downloads"
 
 # --------------------------------------------------------------------------
 # 5. AUTOSTART
@@ -146,7 +146,7 @@ bindsym Shift+Print exec --no-startup-id maim -s ~/Downloads/screenshot-$(date +
 exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1
 exec --no-startup-id xrdb -merge ~/.Xresources
 exec --no-startup-id picom -b
-exec --no-startup-id ~/.config/polybar/polybar-launch.sh
+exec --no-startup-id ~/.local/bin/polybar-launch.sh
 exec --no-startup-id feh --bg-fill $(find ~/workspace/main/WP -type f | shuf -n 1)
 exec --no-startup-id gammastep -l 41.0:28.9 -t 6500:3500
 exec --no-startup-id xsetroot -cursor_name left_ptr
