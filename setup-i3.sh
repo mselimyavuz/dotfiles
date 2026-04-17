@@ -49,6 +49,7 @@ PACKAGES=(
     "sys-apps/dbus"
     "sys-apps/xdg-dbus-proxy"
     "app-admin/bitwarden-cli-bin"
+    "www-client/surf"
 )
 
 # Colors
@@ -137,7 +138,7 @@ REMOVE_LIST=(
     "$HOME/.local/bin/portage-cleaner.py"
     "$HOME/.local/bin/fzf-launcher.sh"
     "$HOME/.local/bin/mail-sync.sh" "$HOME/.urlview"
-    "$HOME/.config/oh-my-posh-theme.json"
+    "$HOME/.config/oh-my-posh-theme.json" "$HOME/.surf"
 )
 
 for item in "${REMOVE_LIST[@]}"; do
@@ -169,6 +170,7 @@ link_config "$DOTFILES_DIR/x11.tmux.conf" "$HOME/.tmux.conf"
 link_config "$DOTFILES_DIR/.tmux" "$HOME/.tmux"
 link_config "$DOTFILES_DIR/oh-my-posh-theme.json" "$HOME/.config/oh-my-posh-theme.json"
 link_config "$DOTFILES_DIR/.urlview" "$HOME/.urlview"
+link_config "$DOTFILES_DIR/.surf" "$HOME/.surf"
 
 if [ -d "$DOTFILES_DIR/scripts" ]; then
     for script in "$DOTFILES_DIR/scripts"/*; do
@@ -198,5 +200,5 @@ if [ -d "$DOTFILES_DIR/st-0.9.3" ]; then
     echo -e "${YELLOW}Reminder: Build st manually from $DOTFILES_DIR/st-0.9.3${NC}"
 fi
 
-echo -e "\n${GREEN}::: Setup Complete! Re-login or source ~/.zshrc and rebuild x11-terms/st with savedconfig in /etc/portage/saved/x11-terms/st* :::${NC}"
+echo -e "\n${GREEN}::: Setup Complete! Re-login or source ~/.zshrc and rebuild x11-terms/st and www-client/surf with savedconfig::${NC}"
 
