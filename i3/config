@@ -148,7 +148,7 @@ exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1
 exec --no-startup-id xrdb -merge ~/.Xresources
 exec --no-startup-id picom -b
 exec --no-startup-id ~/.local/bin/polybar-launch.sh
-exec --no-startup-id feh --bg-fill wp/gentoo_wallpaper.png
+exec --no-startup-id feh --bg-fill ~/.config/wp/gentoo_wallpaper.png
 exec --no-startup-id gammastep -l 41.0:28.9 -t 6500:3500
 exec --no-startup-id xsetroot -cursor_name left_ptr
 exec --no-startup-id dunst

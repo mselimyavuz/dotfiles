@@ -139,6 +139,7 @@ REMOVE_LIST=(
     "$HOME/.local/bin/fzf-launcher.sh"
     "$HOME/.local/bin/mail-sync.sh" "$HOME/.urlview"
     "$HOME/.config/oh-my-posh-theme.json" "$HOME/.surf"
+    "$HOME/.config/wp"
 )
 
 for item in "${REMOVE_LIST[@]}"; do
@@ -172,6 +173,8 @@ link_config "$DOTFILES_DIR/.tmux" "$HOME/.tmux"
 link_config "$DOTFILES_DIR/oh-my-posh-theme.json" "$HOME/.config/oh-my-posh-theme.json"
 link_config "$DOTFILES_DIR/.urlview" "$HOME/.urlview"
 link_config "$DOTFILES_DIR/.surf" "$HOME/.surf"
+link_config "$DOTFILES_DIR/wp" "$HOME/.config/wp"
+link_config "$DOTFILES_DIR/borg-excludes.txt" "$HOME/.config/borg-excludes.txt"
 
 if [ -d "$DOTFILES_DIR/scripts" ]; then
     for script in "$DOTFILES_DIR/scripts"/*; do
