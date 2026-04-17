@@ -1,3 +1,6 @@
 termusic/data.db
 termusic/library2.db
 termusic/playlist.log
+.surf/*
+!.surf/styles/
+!.surf/styles/default.css
