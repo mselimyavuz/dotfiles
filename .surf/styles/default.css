@@ -1,65 +1,37 @@
-/* Gruvbox Dark Palette
-   Background: #282828
-   Foreground: #ebdbb2
-   Links:      #83a598 (Blue)
-   Headings:   #fabd2f (Yellow)
-*/
-
-/* Apply to the main body */
-html, body {
-    background-color: #282828 !vehemently_important !important;
-    color: #ebdbb2 !important;
-    scrollbar-color: #504945 #282828;
+body {
+    font-family: sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Force dark background on generic containers */
-div, section, article, nav, header, footer {
-    background-color: #282828 !important;
-    color: #ebdbb2 !important;
-    border-color: #3c3836 !important;
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
 }
 
-/* Links - Gruvbox Blue */
-a {
-    color: #83a598 !important;
-    text-decoration: none !important;
+::-webkit-scrollbar-track {
+    background: #282828;
 }
 
-a:hover {
-    color: #8ec07c !important; /* Aqua on hover */
-    text-decoration: underline !important;
+::-webkit-scrollbar-thumb {
+    background: #504945;
+    border-radius: 2px;
 }
 
-/* Headings - Gruvbox Yellow/Orange */
-h1, h2, h3, h4, h5, h6 {
-    color: #fabd2f !important;
+::-webkit-scrollbar-thumb:hover {
+    background: #d65d0e; /* Gruvbox Orange hint on hover */
 }
 
-/* Input fields - Gruvbox Darker Grey */
-input, textarea, select {
-    background-color: #3c3836 !important;
-    color: #fbf1c7 !important;
-    border: 1px solid #504945 !important;
+:focus {
+    outline: 2px solid #d65d0e !important;
+    outline-offset: 1px;
 }
 
-/* Selection color */
 ::selection {
-    background-color: #d65d0e !important; /* Gruvbox Orange */
-    color: #fbf1c7 !important;
+    background: #d65d0e;
+    color: #fbf1c7;
 }
 
-/* Keep images from being too bright */
-img {
-    opacity: 0.85;
-    transition: opacity 0.3s;
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
-
-img:hover {
-    opacity: 1;
-}
-
-/* Video player compatibility */
-video {
-    background-color: #000 !important;
-}
-

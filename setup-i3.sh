@@ -129,7 +129,7 @@ fi
 # ==========================================
 echo -e "\n${BLUE}[4/6] Cleaning old configurations...${NC}"
 REMOVE_LIST=(
-    "$HOME/.zshrc" "$HOME/.Xresources" "$HOME/.tmux.conf" "$HOME/.tmux"
+    "$HOME/.zshrc" "$HOME/.Xresources" "$HOME/.tmux.conf" "$HOME/.tmux" "$HOME/.profile"
     "$HOME/.config/btop" "$HOME/.config/fastfetch"
     "$HOME/.config/nvim" "$HOME/.config/mpv"
     "$HOME/.config/i3" "$HOME/.config/polybar" "$HOME/.config/dunst" "$HOME/.config/picom"
@@ -164,6 +164,7 @@ link_config() {
     fi
 }
 
+link_config "$DOTFILES_DIR/.profile" "$HOME/.profile"
 link_config "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 link_config "$DOTFILES_DIR/.Xresources" "$HOME/.Xresources"
 link_config "$DOTFILES_DIR/x11.tmux.conf" "$HOME/.tmux.conf"
