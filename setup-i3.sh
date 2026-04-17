@@ -140,7 +140,7 @@ link_config() {
 
 link_config "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 link_config "$DOTFILES_DIR/.Xresources" "$HOME/.Xresources"
-link_config "$DOTFILES_DIR/.tmux.conf" "$HOME/.tmux.conf"
+link_config "$DOTFILES_DIR/x11.tmux.conf" "$HOME/.tmux.conf"
 link_config "$DOTFILES_DIR/oh-my-posh-theme.json" "$HOME/.config/oh-my-posh-theme.json"
 link_config "$DOTFILES_DIR/.urlview" "$HOME/.urlview"
 

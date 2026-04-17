@@ -1,0 +1,246 @@
+# ~/.config/sway/config
+
+set $mod Mod4
+
+set $left h
+set $down j
+set $up k
+set $right l
+
+set $term foot
+set $notifications mako
+set $browser librewolf
+set $filemanager $term -e ranger
+set $mailclient $term -e aerc
+set $musicplayer $term -e /home/mselimyavuz/.cargo/bin/termusic
+set $launcher $term --app-id=app-launcher zsh -c "/home/mselimyavuz/.local/bin/sway-launcher.sh"
+
+set $laptop eDP-1
+set $projector HDMI-A-1
+
+output $laptop resolution 2880x1800@90.001Hz position 0 0 scale 1.00 enable
+output * scale_filter smart
+
+output $projector enable pos 1920 0
+
+set $bg			#1d2021
+set $fg			#ebdbb2
+set $gray		#928374
+set $yellow		#fabd2f
+set $green		#b8bb26
+set $red		#fb4934
+set $orange		#d65d0e
+set $gentoo_purple	#7154a1
+set $gentoo_dark	#2e2345
+
+# Syntax:		border		background	text	indicator	child_border
+client.focused		$orange  	$orange		#ffffff	$orange		$orange
+client.unfocused	$gentoo_dark	$gentoo_dark	#888888	$gentoo_dark	$gentoo_dark
+
+focus_follows_mouse yes
+default_border pixel 2
+default_floating_border pixel 2
+gaps inner 5
+gaps outer 5
+
+for_window [floating] opacity 0.5
+for_window [window_role = "pop-up"] floating enable
+for_window [window_role = "bubble"] floating enable
+for_window [window_role = "dialog"] floating enable
+for_window [window_type = "dialog"] floating enable
+for_window [window_role = "task_dialog"] floating enable
+for_window [window_type = "menu"] floating enable
+for_window [app_id = "floating"] floating enable
+for_window [app_id = "floating_update"] floating enable, resize set width 1000px height 600px
+for_window [class = "(?i)pinentry"] floating enable
+for_window [title = "Administrator privileges required"] floating enable
+for_window [class="^(steam$)" title="^(?!Steam$)"] floating enable
+for_window [app_id="org.pwmt.zathura"] focus
+for_window [app_id="^(app-launcher|waybar_nmtui|waybar_btop|waybar_gdu|waybar_zram|waybar_stui)$"] {
+    floating enable
+    sticky enable
+    border pixel 2
+    border_color $yellow
+    move position center
+    
+    shadows enable
+    shadow_blur_radius 20
+    shadow_color #fabd2f7F  # Using an alpha value for the shadow glow
+    corner_radius 12
+    
+    title_format " "
+}
+for_window [app_id="app-launcher"] resize set 1200 px 300 px, move position center
+for_window [app_id="waybar_btop"] resize set 2000 px 1400 px, move position center
+for_window [app_id="waybar_nmtui"] resize set 1000 px 750 px, move position center
+for_window [app_id="waybar_stui"] resize set 2000 px 1400 px, move position center
+for_window [app_id="waybar_gdu"] resize set 2000 px 1400 px, move position center
+for_window [app_id="waybar_zram"] resize set 2000 px 1400 px, move position center
+
+corner_radius 10
+shadows enable
+shadow_blur_radius 20
+shadow_color #0000007F
+
+blur enable
+blur_passes 3
+blur_radius 5
+default_dim_inactive 0.1
+
+layer_effects "notifications" {
+    blur enable;
+    blur_ignore_transparent enable;
+    shadows enable;
+    shadow_color #000000FF;
+    corner_radius 10;
+}
+
+layer_effects "waybar" {
+    blur enable;
+    blur_ignore_transparent enable;
+    corner_radius 12;
+}
+
+input type:touchpad {
+    dwt enabled             # Disable While Typing
+    tap enabled             # Tap to click
+    natural_scroll enabled  # Invert scrolling direction (Mac-style)
+    pointer_accel 0.5       # Speed: -1.0 to 1.0 (0.0 is default)
+    accel_profile adaptive  # adaptive (speed changes with movement) or flat
+}
+
+input type:keyboard {
+	xkb_layout "us,tr"
+	xkb_options "grp:win_space_toggle,caps:capslock"
+	repeat_delay 200
+	repeat_rate 60
+}
+
+bindsym $mod+Return exec $term
+bindsym $mod+w exec $browser
+bindsym $mod+n exec $filemanager
+bindsym $mod+m exec $mailclient
+bindsym $mod+t exec $musicplayer
+bindsym $mod+d exec $launcher
+
+bindsym $mod+Shift+q kill
+bindsym $mod+Shift+c reload
+bindsym $mod+e exec swaymsg exit
+
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+bindsym $mod+minus splitv
+bindsym $mod+Shift+backslash splith
+
+bindsym $mod+Shift+s layout stacking
+bindsym $mod+Shift+t layout tabbed
+bindsym $mod+Shift+e layout toggle split
+
+bindsym $mod+f fullscreen
+
+bindsym $mod+Shift+f floating toggle
+
+bindsym $mod+Alt+space focus mode_toggle
+
+bindsym $mod+a focus parent
+
+floating_modifier $mod normal
+
+mode "resize" {
+    bindsym $left resize shrink width 30px
+    bindsym $down resize grow height 30px
+    bindsym $up resize shrink height 30px
+    bindsym $right resize grow width 30px
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+mode "present" {
+    bindsym m mode "default"; exec wl-present mirror
+    bindsym Shift+m mode "default"; exec wl-present mirror --fullscreen
+
+    bindsym o mode "default"; exec wl-present set-output
+    bindsym r mode "default"; exec wl-present set-region
+    bindsym Shift+r mode "default"; exec wl-present unset-region
+    bindsym s mode "default"; exec wl-present set-scaling
+    bindsym f mode "default"; exec wl-present toggle-freeze
+    bindsym c mode "default"; exec wl-present custom
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+p mode "present"
+
+bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+
+bindsym Print exec grim -g "$(slurp)" - | wl-copy && notify-send "Screenshot Copied" "Region copied to clipboard" -i clipboard
+bindsym Shift+Print exec bash -c 'FILENAME="screenshot-$(date +%Y%m%d-%H%M%S).png"; FILEPATH="$HOME/Downloads/$FILENAME"; grim -g "$(slurp)" "$FILEPATH" && notify-send "Screenshot Saved" "Saved to ~/Downloads/$FILENAME" -i "$FILEPATH"'
+
+exec $notifications
+set $wallpapers_path $HOME/workspace/main/WP
+output * bg $(find $wallpapers_path -type f | shuf -n 1) fill
+
+exec /usr/libexec/polkit-gnome-authentication-agent-1
+exec xrdb -merge ~/.Xresources
+exec waybar
+exec kanshi
+exec gammastep -l 41.0:28.9 -t 6500:3500
+exec_always wl-paste --type text --watch cliphist store
+exec_always wl-paste --type image --watch cliphist store
+exec xhost +si:localuser:root
+exec dbus-update-activation-environment --all
+exec gnome-keyring-daemon --start --components=secrets
+exec export $(gnome-keyring-daemon)
+exec gentoo-pipewire-launcher restart &
+exec ~/gentoo-dotfiles-laptop/mail-sync.sh
+xwayland enable
+seat seat0 xcursor_theme "Chameleon-Pearl-Large-0.5" 40
+
+exec_always {
+    gsettings set org.gnome.desktop.interface cursor-theme 'Chameleon-Pearl-Large-0.5'
+    gsettings set org.gnome.desktop.interface cursor-size 40
+    gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+}
+
+include ~/.config/sway/config.d/*
+include /etc/sway/config.d/*
+
