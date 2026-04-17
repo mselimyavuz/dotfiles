@@ -77,7 +77,7 @@
     "format": "{}",
     "tooltip": true,
     "interval": 3600,
-    "exec": "$HOME/gentoo-dotfiles-laptop/waybar/weather.sh",
+    "exec": "~/.config/waybar/weather.sh",
     "return-type": "json"
     },
 
