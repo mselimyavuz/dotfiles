@@ -61,7 +61,7 @@ bindsym $mod+w exec librewolf
 bindsym $mod+n exec /usr/bin/st -e /bin/zsh -ic "ranger"
 bindsym $mod+m exec /usr/bin/st -e /bin/zsh -ic "aerc"
 bindsym $mod+t exec /usr/bin/st -e /bin/zsh -ic "termusic"
-bindsym $mod+Shift+p exec --no-startup-id st -c "Launcher" -e ~/.local/bin/display-manager.sh
+bindsym $mod+p exec --no-startup-id st -c "Launcher" -e ~/.local/bin/display-manager.sh
 
 # Session Management
 bindsym $mod+Shift+q kill
