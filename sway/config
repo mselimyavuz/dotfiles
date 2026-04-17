@@ -10,8 +10,8 @@ set $right l
 set $term foot
 set $notifications mako
 set $browser librewolf
-set $filemanager $term -e ranger
-set $mailclient $term -e aerc
+set $filemanager $term -e  zsh -c "ranger"
+set $mailclient $term -e  zsh -c "aerc"
 set $musicplayer $term zsh -c "~/.cargo/bin/termusic"
 set $launcher $term --app-id=app-launcher zsh -c "~/.local/bin/fzf-launcher.sh"
 
