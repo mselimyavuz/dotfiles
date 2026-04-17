@@ -20,6 +20,8 @@ PACKAGES=(
     "x11-apps/setxkbmap"
     "x11-apps/xrandr"
     "x11-misc/xclip"
+    "x11-misc/xdotool"
+    "app-misc/jq"
     "media-gfx/maim"
     "x11-terms/st"
     "x11-apps/xinput"
@@ -46,6 +48,7 @@ PACKAGES=(
     "sys-apps/xdg-desktop-portal-gtk"
     "sys-apps/dbus"
     "sys-apps/xdg-dbus-proxy"
+    "app-admin/bitwarden-cli-bin"
 )
 
 # Colors

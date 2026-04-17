@@ -30,6 +30,7 @@ PACKAGES=(
     "app-misc/ranger"
     "mail-client/aerc"
     "app-shells/fzf"
+    "app-misc/jq"
     "media-sound/pavucontrol"
     "x11-misc/gammastep"
     "gnome-base/gnome-keyring"
