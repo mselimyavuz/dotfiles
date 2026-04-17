@@ -13,36 +13,32 @@ fi
 PACKAGES=(
     "app-shells/zsh"
     "app-misc/tmux"
-    "x11-wm/i3"
-    "x11-misc/polybar"
-    "x11-misc/dunst"
-    "x11-misc/picom"
-    "x11-apps/setxkbmap"
-    "x11-apps/xrandr"
-    "x11-misc/xclip"
-    "media-gfx/maim"
-    "x11-terms/st"
-    "x11-apps/xinput"
-    "x11-apps/xhost"
+    "gui-wm/swayfx"
+    "gui-apps/waybar"
+    "gui-apps/mako"
     "media-video/mpv"
     "sys-process/btop"
-    "sys-fs/gdu"
-    "app-admin/s-tui"
-    "sys-apps/bat"
     "app-misc/fastfetch"
+    "gui-apps/foot"
     "app-editors/neovim"
+    "app-admin/s-tui"
+    "sys-fs/gdu"
+    "sys-apps/bat"
+    "gui-apps/kanshi"
     "app-text/zathura"
     "app-text/zathura-pdf-poppler"
     "app-misc/ranger"
     "mail-client/aerc"
     "app-shells/fzf"
     "media-sound/pavucontrol"
-    "app-misc/brightnessctl"
-    "media-gfx/feh"
     "x11-misc/gammastep"
     "gnome-base/gnome-keyring"
     "x11-themes/chameleon-xcursors"
     "media-fonts/nerdfonts"
+    "x11-apps/xhost"
+    "gui-apps/wl-clipboard"
+    "sys-apps/xdg-desktop-portal"
+    "sys-apps/xdg-desktop-portal-wlr"
     "sys-apps/xdg-desktop-portal-gtk"
     "sys-apps/dbus"
     "sys-apps/xdg-dbus-proxy"
@@ -55,7 +51,7 @@ RED='\033[0;31m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-echo -e "${BLUE}::: Starting Gentoo X11/i3 Dotfiles Setup :::${NC}"
+echo -e "${BLUE}::: Starting Gentoo Dotfiles Setup :::${NC}"
 
 # ==========================================
 # 0. DISTRO CHECK
@@ -66,7 +62,9 @@ if [ -f /etc/os-release ]; then
         echo -e "${GREEN}✓ Detected Gentoo system.${NC}"
     else
         echo -e "${RED}ERROR: This script is intended for Gentoo systems.${NC}"
-        exit 1
+        read -p "Continue anyway? (y/N) " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then exit 1; fi
     fi
 fi
 
@@ -93,9 +91,20 @@ for tool in "app-portage/portage-utils:qlist" "app-portage/gentoolkit:equery" "a
 done
 
 # ==========================================
-# 2. PACKAGE INSTALLATION
+# 2. REPO CHECK (GURU)
 # ==========================================
-echo -e "\n${BLUE}[2/6] Checking System Packages...${NC}"
+echo -e "\n${BLUE}[2/5] Checking GURU Overlay...${NC}"
+if eselect repository list -i | grep -qE "\s+guru\s+"; then
+    echo -e "${GREEN}✓ GURU overlay active.${NC}"
+else
+    sudo eselect repository enable guru
+    sudo emaint sync -r guru
+fi
+
+# ==========================================
+# 3. PACKAGE INSTALLATION
+# ==========================================
+echo -e "\n${BLUE}[3/6] Checking System Packages...${NC}"
 PACKAGES_TO_INSTALL=()
 for pkg in "${PACKAGES[@]}"; do
     if qlist -IC "$pkg" > /dev/null; then
@@ -110,27 +119,16 @@ if [ ${#PACKAGES_TO_INSTALL[@]} -ne 0 ]; then
 fi
 
 # ==========================================
-# 3. REPO CHECK
-# ==========================================
-echo -e "\n${BLUE}[3/6] Checking GURU Overlay...${NC}"
-if eselect repository list -i | grep -qE "\s+guru\s+"; then
-    echo -e "${GREEN}✓ GURU overlay active.${NC}"
-else
-    sudo eselect repository enable guru
-    sudo emaint sync -r guru
-fi
-
-# ==========================================
-# 4. CLEANUP ROUTINE
+# 4. CLEANUP ROUTINE (Matches current structure)
 # ==========================================
 echo -e "\n${BLUE}[4/6] Cleaning old configurations...${NC}"
 REMOVE_LIST=(
     "$HOME/.zshrc" "$HOME/.Xresources" "$HOME/.tmux.conf" "$HOME/.tmux"
-    "$HOME/.config/btop" "$HOME/.config/fastfetch"
-    "$HOME/.config/nvim" "$HOME/.config/mpv"
-    "$HOME/.config/i3" "$HOME/.config/polybar" "$HOME/.config/dunst" "$HOME/.config/picom"
+    "$HOME/.config/btop" "$HOME/.config/fastfetch" "$HOME/.config/foot"
+    "$HOME/.config/mako" "$HOME/.config/mpv" "$HOME/.config/nvim"
+    "$HOME/.config/sway" "$HOME/.config/waybar"
     "$HOME/.config/ranger" "$HOME/.config/aerc" "$HOME/.config/termusic"
-    "$HOME/euporie" "$HOME/.config/zathura"
+    "$HOME/.config/euporie" "$HOME/.config/zathura"
     "$HOME/.local/bin/portage-cleaner.py"
     "$HOME/.local/bin/fzf-launcher.sh"
     "$HOME/.local/bin/mail-sync.sh" "$HOME/.urlview"
@@ -152,7 +150,7 @@ link_config() {
     local dest="$2"
     if [ -e "$src" ]; then
         mkdir -p "$(dirname "$dest")"
-        ln -sf "$src" "$dest"
+        ln -s "$src" "$dest"
         echo -e "${GREEN}Linked:${NC} $dest -> $src"
     else
         echo -e "${YELLOW}Warning:${NC} Source $src not found. Skipping."
@@ -161,7 +159,7 @@ link_config() {
 
 link_config "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 link_config "$DOTFILES_DIR/.Xresources" "$HOME/.Xresources"
-link_config "$DOTFILES_DIR/x11.tmux.conf" "$HOME/.tmux.conf"
+link_config "$DOTFILES_DIR/wayland.tmux.conf" "$HOME/.tmux.conf"
 link_config "$DOTFILES_DIR/.tmux" "$HOME/.tmux"
 link_config "$DOTFILES_DIR/oh-my-posh-theme.json" "$HOME/.config/oh-my-posh-theme.json"
 link_config "$DOTFILES_DIR/.urlview" "$HOME/.urlview"
@@ -173,16 +171,20 @@ if [ -d "$DOTFILES_DIR/scripts" ]; then
     done
 fi
 
-CONFIG_DIRS=("aerc" "btop" "dunst" "euporie" "fastfetch" "i3" "mpv" "nvim" "picom" "polybar" "ranger" "termusic" "zathura")
-for dir in "${CONFIG_DIRS[@]}"; do
-    link_config "$DOTFILES_DIR/$dir" "$HOME/.config/$dir"
+CONFIGS=(
+    "aerc" "btop" "euporie" "fastfetch" "foot" "mako" 
+    "mpv" "nvim" "ranger" "sway" "termusic" "waybar" 
+    "zathura"
+)
+
+for cfg in "${CONFIGS[@]}"; do
+    link_config "$DOTFILES_DIR/$cfg" "$HOME/.config/$cfg"
 done
 
 # ==========================================
-# 6. PERMISSIONS & POST-INSTALL
+# 6. POST-INSTALL & PERMISSIONS
 # ==========================================
 echo -e "\n${BLUE}[6/6] Setting permissions...${NC}"
-find "$DOTFILES_DIR/scripts" -type f -exec chmod +x {} +
 
 TPM_DIR="$HOME/.tmux/plugins/tpm"
 if [ ! -d "$TPM_DIR" ]; then
@@ -190,9 +192,7 @@ if [ ! -d "$TPM_DIR" ]; then
     git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
 fi
 
-if [ -d "$DOTFILES_DIR/st-0.9.3" ]; then
-    echo -e "${YELLOW}Reminder: Build st manually from $DOTFILES_DIR/st-0.9.3${NC}"
-fi
+find "$DOTFILES_DIR/scripts" -type f -exec chmod +x {} +
 
-echo -e "\n${GREEN}::: Setup Complete! Re-login or source ~/.zshrc and rebuild x11-terms/st with savedconfig in /etc/portage/saved/x11-terms/st* :::${NC}"
+echo -e "\n${GREEN}::: Setup Complete! Re-login or source ~/.zshrc and build Ferdi265/wl-mirror if you want present mode to work :::${NC}"
 
