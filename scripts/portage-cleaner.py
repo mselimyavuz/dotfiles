@@ -16,6 +16,7 @@ def process_path(target_path):
 
     is_dir = os.path.isdir(target_path)
     consolidated = collections.defaultdict(set)
+    verbatim_lines = []  # lines to preserve as-is, in order
 
     files_to_read = []
     if is_dir:
@@ -29,17 +30,23 @@ def process_path(target_path):
     for filepath in files_to_read:
         with open(filepath, 'r') as f:
             for line in f:
-                line = line.strip()
-                if not line or line.startswith('#'):
+                stripped = line.strip()
+                if not stripped or stripped.startswith('#'):
                     continue
-                
-                parts = line.split('#')[0].split()
+
+                parts = stripped.split('#')[0].split()
                 if not parts:
                     continue
-                
+
                 atom = parts[0]
                 flags = parts[1:]
-                consolidated[atom].update(flags)
+
+                # Preserve lines that use colon-style flag groups (e.g. PYTHON_TARGETS:)
+                # or any other line that shouldn't be merged
+                if any(':' in flag for flag in flags):
+                    verbatim_lines.append(stripped)
+                else:
+                    consolidated[atom].update(flags)
 
     if not is_dir:
         shutil.copy2(target_path, target_path + ".bak")
@@ -50,6 +57,12 @@ def process_path(target_path):
     sorted_atoms = sorted(consolidated.keys(), key=get_sort_key)
 
     with open(output_path, 'w') as f:
+        # Write verbatim lines first (preserving order, no merging)
+        for line in verbatim_lines:
+            f.write(line + '\n')
+        if verbatim_lines and sorted_atoms:
+            f.write('\n')  # blank line separator
+        # Write consolidated/sorted entries
         for atom in sorted_atoms:
             flags_list = sorted(list(consolidated[atom]))
             f.write(f"{atom} {' '.join(flags_list)}\n")
