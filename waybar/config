@@ -214,10 +214,10 @@
     "format": "󰈐 {}"
 	},
 "custom/zram": {
-    "exec": "awk '{total+=$3; used+=$6} END {if (total>0) printf \"%.0f%%\\n\", (used/total)*100; else print \"0%\"}' /sys/block/zram*/mm_stat",
+    "exec": "awk '/SwapTotal/{total=$2} /SwapFree/{free=$2} END {if (total>0) printf \"%.0f%%\\n\", ((total-free)/total)*100; else print \"0%\"}' /proc/meminfo",
     "interval": 10,
     "format": "SW {}",
-    "tooltip-format": "zRAM Utilization",
+    "tooltip-format": "Swap Utilization",
     "on-click": "foot --app-id=waybar_zram -e watch zramctl"
 },
 "backlight": {
