@@ -12,16 +12,16 @@ set $notifications mako
 set $browser librewolf
 set $filemanager $term -e ranger
 set $mailclient $term -e aerc
-set $musicplayer $term -e /home/mselimyavuz/.cargo/bin/termusic
-set $launcher $term --app-id=app-launcher zsh -c "/home/mselimyavuz/.local/bin/sway-launcher.sh"
+set $musicplayer $term zsh -c "~/.cargo/bin/termusic"
+set $launcher $term --app-id=app-launcher zsh -c "~/.local/bin/sway-launcher.sh"
 
 set $laptop eDP-1
-set $projector HDMI-A-1
+set $monitor HDMI-A-1
 
-output $laptop resolution 2880x1800@90.001Hz position 0 0 scale 1.00 enable
+output monitor resolution 3840x2160@59.940Hz
+# output $laptop resolution 2880x1800@90.001Hz position 0 0 scale 1.00 enable
 output * scale_filter smart
-
-output $projector enable pos 1920 0
+# output $monitor enable pos 1920 0
 
 set $bg			#1d2021
 set $fg			#ebdbb2

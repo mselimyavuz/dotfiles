@@ -24,7 +24,7 @@ alias se='doas env XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/shar
 alias fix-phone='adb shell settings put global force_fsg_nav_bar 1 && adb shell settings put global hide_gesture_line 1'
 alias ls="eza --icons --git --group-directories-first"
 
-eval "$(oh-my-posh init zsh --config /home/mselimyavuz/gentoo-dotfiles-laptop/oh-my-posh-theme.json)"
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh-theme.json)"
 fastfetch
 
 yt-playlist() {

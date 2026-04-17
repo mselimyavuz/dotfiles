@@ -56,7 +56,7 @@ for_window [floating] opacity 0.5
 # Apps
 bindsym $mod+Return exec --no-startup-id /usr/bin/st -e /bin/zsh -c "tmux attach-session -t default || tmux new-session -s default"
 bindsym $mod+KP_Enter exec --no-startup-id /usr/bin/st -e /bin/zsh -c "tmux attach-session -t default || tmux new-session -s default"
-bindsym $mod+d exec --no-startup-id st -c "Launcher" -e /home/mselimyavuz/.local/bin/fzf-launcher.sh
+bindsym $mod+d exec --no-startup-id st -c "Launcher" -e ~/.local/bin/fzf-launcher.sh
 bindsym $mod+w exec librewolf
 bindsym $mod+n exec /usr/bin/st -e /bin/zsh -ic "ranger"
 bindsym $mod+m exec /usr/bin/st -e /bin/zsh -ic "aerc"

@@ -93,9 +93,20 @@ for tool in "app-portage/portage-utils:qlist" "app-portage/gentoolkit:equery" "a
 done
 
 # ==========================================
-# 2. PACKAGE INSTALLATION
+# 2. REPO CHECK
 # ==========================================
-echo -e "\n${BLUE}[2/6] Checking System Packages...${NC}"
+echo -e "\n${BLUE}[2/6] Checking GURU Overlay...${NC}"
+if eselect repository list -i | grep -qE "\s+guru\s+"; then
+    echo -e "${GREEN}✓ GURU overlay active.${NC}"
+else
+    sudo eselect repository enable guru
+    sudo emaint sync -r guru
+fi
+
+# ==========================================
+# 3. PACKAGE INSTALLATION
+# ==========================================
+echo -e "\n${BLUE}[3/6] Checking System Packages...${NC}"
 PACKAGES_TO_INSTALL=()
 for pkg in "${PACKAGES[@]}"; do
     if qlist -IC "$pkg" > /dev/null; then
@@ -107,17 +118,6 @@ done
 
 if [ ${#PACKAGES_TO_INSTALL[@]} -ne 0 ]; then
     sudo emerge --noreplace --ask --verbose "${PACKAGES_TO_INSTALL[@]}"
-fi
-
-# ==========================================
-# 3. REPO CHECK
-# ==========================================
-echo -e "\n${BLUE}[3/6] Checking GURU Overlay...${NC}"
-if eselect repository list -i | grep -qE "\s+guru\s+"; then
-    echo -e "${GREEN}✓ GURU overlay active.${NC}"
-else
-    sudo eselect repository enable guru
-    sudo emaint sync -r guru
 fi
 
 # ==========================================
@@ -134,6 +134,7 @@ REMOVE_LIST=(
     "$HOME/.local/bin/portage-cleaner.py"
     "$HOME/.local/bin/fzf-launcher.sh"
     "$HOME/.local/bin/mail-sync.sh" "$HOME/.urlview"
+    "$HOME/.config/oh-my-posh-theme.json"
 )
 
 for item in "${REMOVE_LIST[@]}"; do

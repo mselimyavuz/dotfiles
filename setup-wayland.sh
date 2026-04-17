@@ -132,6 +132,7 @@ REMOVE_LIST=(
     "$HOME/.local/bin/portage-cleaner.py"
     "$HOME/.local/bin/fzf-launcher.sh"
     "$HOME/.local/bin/mail-sync.sh" "$HOME/.urlview"
+    "$HOME/.config/oh-my-posh-theme.json"
 )
 
 for item in "${REMOVE_LIST[@]}"; do
