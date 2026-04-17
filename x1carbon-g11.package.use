@@ -217,6 +217,7 @@ sys-libs/zlib minizip
 >=virtual/opengl-8 abi_x86_32
 >=virtual/zlib-1.3.1-r1 abi_x86_32
 www-client/librewolf hwaccel pgo system-pipewire system-png
+www-client/surf savedconfig
 x11-base/xorg-server xvfb
 >=x11-drivers/nvidia-drivers-580.105.08 abi_x86_32
 >=x11-libs/cairo-1.18.4-r1 abi_x86_32
