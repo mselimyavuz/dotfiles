@@ -232,11 +232,11 @@ exec export $(gnome-keyring-daemon)
 exec gentoo-pipewire-launcher restart &
 exec ~/gentoo-dotfiles-laptop/mail-sync.sh
 xwayland enable
-seat seat0 xcursor_theme "Chameleon-Pearl-Large-0.5" 40
+seat seat0 xcursor_theme "Chameleon-Pearl-Regular-0.5" 24
 
 exec_always {
-    gsettings set org.gnome.desktop.interface cursor-theme 'Chameleon-Pearl-Large-0.5'
-    gsettings set org.gnome.desktop.interface cursor-size 40
+    gsettings set org.gnome.desktop.interface cursor-theme 'Chameleon-Pearl-Regular-0.5'
+    gsettings set org.gnome.desktop.interface cursor-size 24
     gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 }
