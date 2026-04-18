@@ -68,7 +68,7 @@
     "custom/media-label": {
         "format": "{}",
         "return-type": "json",
-        "max-length": 200,  // High limit to ensure full text shows
+        "max-length": 200,
         "exec": "playerctl -a metadata --format '{\"text\": \"{{markup_escape(title)}} / {{artist}} / {{markup_escape(album)}}\", \"tooltip\": \"{{playerName}} : {{artist}} - {{markup_escape(album)}} - {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
         "on-click": "playerctl play-pause"
     },
@@ -77,8 +77,7 @@
     "format": "{}",
     "tooltip": true,
     "interval": 3600,
-    "exec": "~/.config/waybar/weather.sh",
-    "return-type": "json"
+    "exec": "~/.local/bin/weather.sh"
     },
 
     "custom/uptime": {
