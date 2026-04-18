@@ -5,14 +5,21 @@ build_cache() {
     local execs=$(echo "$PATH" | tr ':' '\n' | while read dir; do
         [[ -d "$dir" ]] && find "$dir" -maxdepth 1 -type f -executable 2>/dev/null
     done | xargs -r -n1 basename | sort -u | awk '{print $1 " (" $1 ")"}')
-
     local desktops=$(find /usr/share/applications ~/.local/share/applications -name "*.desktop" 2>/dev/null | xargs awk -F= '
         /^Name=/ {name=$2} 
         /^Exec=/ {exec=$2; if(name && exec) {gsub(/%[a-zA-Z]/, "", exec); print name " (" exec ")"}}
     ' 2>/dev/null)
-
     echo -e "$execs\n$desktops" | sort -u > "$CACHE_FILE"
 }
+
+# Detect compositor
+if [[ -n "$SWAYSOCK" ]] || pgrep -x sway &>/dev/null; then
+    WM_EXEC="swaymsg exec"
+elif [[ -n "$I3SOCK" ]] || pgrep -x i3 &>/dev/null; then
+    WM_EXEC="i3-msg exec"
+else
+    WM_EXEC="exec"
+fi
 
 if [[ ! -f "$CACHE_FILE" ]]; then
     build_cache
@@ -24,19 +31,16 @@ output=$(echo "↺ Rebuild cache\n$(cat "$CACHE_FILE")" | fzf --reverse --print-
 
 query=$(echo "$output" | head -1)
 selected=$(echo "$output" | tail -1)
-
-# tail -1 returns the query again if nothing was selected
 [[ "$query" == "$selected" ]] && selected=""
 
 if [[ -n "$query" && -z "$selected" ]]; then
-    # nothing matched — run raw input as a path/command
-    i3-msg exec "$query"
+    $WM_EXEC "$query"
 elif [[ -n "$selected" ]]; then
     if [[ "$selected" == "↺ Rebuild cache" ]]; then
         build_cache
     else
         cmd=$(echo "$selected" | sed 's/.*(\(.*\))/\1/' | xargs)
-        i3-msg exec "$cmd"
+        $WM_EXEC "$cmd"
     fi
 fi
 
