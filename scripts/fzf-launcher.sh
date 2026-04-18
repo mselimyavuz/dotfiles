@@ -12,13 +12,12 @@ build_cache() {
     echo -e "$execs\n$desktops" | sort -u > "$CACHE_FILE"
 }
 
-# Detect compositor
 if [[ -n "$SWAYSOCK" ]] || pgrep -x sway &>/dev/null; then
-    WM_EXEC="swaymsg exec"
+    launch() { swaymsg exec -- "$@" }
 elif [[ -n "$I3SOCK" ]] || pgrep -x i3 &>/dev/null; then
-    WM_EXEC="i3-msg exec"
+    launch() { i3-msg exec "$@" }
 else
-    WM_EXEC="exec"
+    launch() { nohup "$@" &>/dev/null & }
 fi
 
 if [[ ! -f "$CACHE_FILE" ]]; then
@@ -34,13 +33,13 @@ selected=$(echo "$output" | tail -1)
 [[ "$query" == "$selected" ]] && selected=""
 
 if [[ -n "$query" && -z "$selected" ]]; then
-    $WM_EXEC "$query"
+    launch "$query"
 elif [[ -n "$selected" ]]; then
     if [[ "$selected" == "↺ Rebuild cache" ]]; then
         build_cache
     else
         cmd=$(echo "$selected" | sed 's/.*(\(.*\))/\1/' | xargs)
-        $WM_EXEC "$cmd"
+        launch "$cmd"
     fi
 fi
 
