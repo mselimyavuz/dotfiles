@@ -62,6 +62,26 @@ NC='\033[0m'
 echo -e "${BLUE}::: Starting Gentoo X11/i3 Dotfiles Setup :::${NC}"
 
 # ==========================================
+# PRE-FLIGHT DESTRUCTION WARNING
+# ==========================================
+echo -e "\n${RED}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${NC}"
+echo -e "${RED}WARNING: IRREVERSIBLE CONFIGURATION REMOVAL${NC}"
+echo -e "${RED}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${NC}"
+echo -e "This script ${YELLOW}WILL DELETE${NC} your existing configuration files in:"
+echo -e " - ${BLUE}\$HOME/.config/*${NC} (neovim, sway, waybar, foot, etc.)"
+echo -e " - ${BLUE}\$HOME/.local/bin/*${NC} (custom scripts)"
+echo -e " - ${BLUE}\$HOME/.zshrc, .tmux.conf, .Xresources${NC}"
+echo -e "\n${YELLOW}Ensure your backup of ~/dotfiles is up to date before proceeding.${NC}"
+echo -e "${RED}--------------------------------------------------${NC}"
+
+read -p "Are you absolutely sure you want to proceed? (y/N) " -n 1 -r
+echo
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo -e "${BLUE}Setup aborted by user.${NC}"
+    exit 1
+fi
+
+# ==========================================
 # 0. DISTRO CHECK
 # ==========================================
 if [ -f /etc/os-release ]; then
