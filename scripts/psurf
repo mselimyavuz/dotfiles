@@ -1,0 +1,12 @@
+#!/bin/sh
+
+export http_proxy="http://localhost:8118"
+export https_proxy="http://localhost:8118"
+
+DEFAULT_URL="https://duckduckgo.com"
+
+if [ $# -eq 0 ]; then
+    exec surf -X "$DEFAULT_URL"
+else
+    exec surf -X "$@"
+fi
