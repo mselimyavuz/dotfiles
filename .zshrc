@@ -2,6 +2,8 @@ export ZSH="$HOME/.oh-my-zsh"
 export PATH="$PATH:/home/mselimyavuz/lilypond/bin/"
 export PATH="$PATH:/home/mselimyavuz/.cargo/bin"
 export PATH="$PATH:/home/mselimyavuz/.local/bin"
+export PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig:$PKG_CONFIG_PATH
+export LD_LIBRARY_PATH=/usr/local/lib64:$LD_LIBRARY_PATH
 export JUCE_DIR="$HOME/.local/lib/cmake/JUCE"
 export NVIM_LOG_FILE="$HOME/.local/state/nvim/log"
 

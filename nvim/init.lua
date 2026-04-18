@@ -80,24 +80,47 @@ require('lazy').setup({
   },
   'luisjure/csound-vim',
   {
-    'lervag/vimtex',
-    lazy = false,
-    init = function()
-      vim.g.vimtex_view_method = 'zathura'
-      vim.g.vimtex_compiler_latexmk_engines = { [''] = '-xelatex', ['_'] = '-xelatex' }
-      vim.g.vimtex_view_forward_search_on_start = true
-      vim.g.vimtex_view_zathura_options = '--synctex-forward %line:1:%file'
+  'lervag/vimtex',
+  lazy = false,
+  init = function()
+    vim.g.vimtex_view_method = 'zathura'
+    vim.g.vimtex_compiler_method = 'latexmk'
+    vim.g.vimtex_compiler_latexmk_engines = { _ = '-xelatex' }
+    vim.g.vimtex_view_automatic = 1
+    vim.g.vimtex_view_forward_search_on_start = 1
+    vim.g.vimtex_compiler_latexmk = {
+      aux_dir = '',
+      out_dir = '',
+      callback = 1,
+      continuous = 1,
+      executable = 'latexmk',
+      hooks = {},
+      options = {
+        '-verbose',
+        '-file-line-error',
+        '-synctex=1',
+        '-interaction=nonstopmode',
+      },
+    }
+  end,
+  config = function()
+    vim.keymap.set('n', '<leader>ls', '<cmd>VimtexView<CR>', { desc = 'VimTeX: Forward Search/Sync' })
+    vim.keymap.set('n', '<leader>li', '<cmd>VimtexCompile<CR>', { desc = 'VimTeX: Start/Stop Compilation' })
+    vim.keymap.set('n', '<leader>lk', '<cmd>VimtexStop<CR>', { desc = 'VimTeX: Stop Compilation' })
+    vim.keymap.set('n', '<leader>lv', '<cmd>VimtexView<CR>', { desc = 'VimTeX: View PDF' })
+    vim.keymap.set('n', '<leader>lc', '<cmd>VimtexClean<CR>', { desc = 'VimTeX: Clean' })
+    vim.keymap.set('n', '<leader>le', '<cmd>VimtexErrors<CR>', { desc = 'VimTeX: Show Errors' })
 
-      vim.keymap.set('n', '<leader>ls', '<cmd>VimtexView<CR>', { desc = 'VimTeX: Forward Search/Sync' })
-
-      -- [[ VimTeX Keymaps ]]
-      vim.keymap.set('n', '<leader>li', '<cmd>VimtexCompile<CR>', { desc = 'VimTeX: Start/Stop Compilation' })
-      vim.keymap.set('n', '<leader>lk', '<cmd>VimtexStop<CR>', { desc = 'VimTeX: Stop Compilation' })
-      vim.keymap.set('n', '<leader>lv', '<cmd>VimtexView<CR>', { desc = 'VimTeX: View PDF' })
-      vim.keymap.set('n', '<leader>lc', '<cmd>VimtexClean<CR>', { desc = 'VimTeX: Clean' })
-      vim.keymap.set('n', '<leader>le', '<cmd>VimtexErrors<CR>', { desc = 'VimTeX: Show Errors' })
-    end,
-  },
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'VimtexEventInitPost',
+      callback = function()
+        if vim.b.vimtex and vim.b.vimtex.viewer then
+          vim.cmd([[let b:vimtex.viewer._exists = {-> !empty(b:vimtex.viewer.get_pid())}]])
+        end
+      end,
+    })
+  end,
+},
   { 'NotAShelf/direnv.nvim', config = true },
   {
     'folke/noice.nvim',
