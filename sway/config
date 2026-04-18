@@ -230,7 +230,7 @@ exec dbus-update-activation-environment --all
 exec gnome-keyring-daemon --start --components=secrets
 exec export $(gnome-keyring-daemon)
 exec gentoo-pipewire-launcher restart &
-exec ~/gentoo-dotfiles-laptop/mail-sync.sh
+exec ~/dotfiles/mail-sync.sh
 xwayland enable
 seat seat0 xcursor_theme "Chameleon-Pearl-Regular-0.5" 24
 
