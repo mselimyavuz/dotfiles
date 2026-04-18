@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Define the target
+TARGET="/mnt/musl"
+
+# Ensure the target is a mount point or directory
+if [ ! -d "$TARGET" ]; then
+    echo "Error: $TARGET does not exist."
+    exit 1
+fi
+
+# Use arch-chroot to enter. 
+# It automatically handles /dev, /proc, /sys and resolv.conf
+sudo arch-chroot "$TARGET" /bin/zsh
+
