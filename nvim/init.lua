@@ -1,5 +1,5 @@
 -- [[ General Settings ]]
-vim.lsp.set_log_level("error")
+vim.lsp.log.set_level(vim.log.levels.ERROR)
 
 if not os.getenv("NVIM_LOG_FILE") then
   vim.env.NVIM_LOG_FILE = vim.fn.stdpath("state") .. "/nvim.log"
