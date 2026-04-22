@@ -190,6 +190,7 @@ link_config "$DOTFILES_DIR/wayland.tmux.conf" "$HOME/.tmux.conf"
 link_config "$DOTFILES_DIR/.tmux" "$HOME/.tmux"
 link_config "$DOTFILES_DIR/oh-my-posh-theme.json" "$HOME/.config/oh-my-posh-theme.json"
 link_config "$DOTFILES_DIR/.urlview" "$HOME/.urlview"
+link_config "$DOTFILES_DIR/borg-excludes.txt" "$HOME/.config/borg-excludes.txt"
 
 if [ -d "$DOTFILES_DIR/scripts" ]; then
     for script in "$DOTFILES_DIR/scripts"/*; do

@@ -41,7 +41,7 @@ yt-playlist() {
 borg-backup() {
    sudo borg create --stats --progress --compression lz4 \
     --exclude-from ~/.config/borg-excludes.txt \
-    /mnt/external_backup::gentoo-backup-laptop-$(date +%F) \
+    /mnt/backup::gentoo-backup-$(date +%F) \
     /
 }
 
