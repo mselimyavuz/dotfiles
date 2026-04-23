@@ -55,6 +55,7 @@ for_window [app_id = "floating_update"] floating enable, resize set width 1000px
 for_window [class = "(?i)pinentry"] floating enable
 for_window [title = "Administrator privileges required"] floating enable
 for_window [class="^(steam$)" title="^(?!Steam$)"] floating enable
+for_window [instance="yabridge-host.exe"] floating enable, border none, focus_follows_mouse no
 for_window [app_id="org.pwmt.zathura"] focus
 for_window [app_id="^(app-launcher|waybar_nmtui|waybar_btop|waybar_gdu|waybar_zram|waybar_stui)$"] {
     floating enable
