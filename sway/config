@@ -43,7 +43,7 @@ default_floating_border pixel 2
 gaps inner 5
 gaps outer 5
 
-for_window [floating] opacity 0.5
+for_window [floating] opacity 0.85
 for_window [window_role = "pop-up"] floating enable
 for_window [window_role = "bubble"] floating enable
 for_window [window_role = "dialog"] floating enable
