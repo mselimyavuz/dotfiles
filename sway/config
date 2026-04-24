@@ -19,9 +19,7 @@ set $laptop eDP-1
 set $monitor HDMI-A-1
 
 output $monitor resolution 3840x2160@59.940Hz
-# output $laptop resolution 2880x1800@90.001Hz position 0 0 scale 1.00 enable
 output * scale_filter smart
-# output $monitor enable pos 1920 0
 
 set $bg			#1d2021
 set $fg			#ebdbb2
@@ -219,23 +217,30 @@ exec $notifications
 set $wallpapers_path $HOME/workspace/main/WP
 output * bg $(find $wallpapers_path -type f | shuf -n 1) fill
 
+exec dbus-update-activation-environment --all
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+exec killall -q xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr; sleep 1; /usr/libexec/xdg-desktop-portal
+
 exec /usr/libexec/polkit-gnome-authentication-agent-1
-exec xrdb -merge ~/.Xresources
+exec eval $(gnome-keyring-daemon --start --components=secrets)
+
+exec gentoo-pipewire-launcher restart
 exec waybar
 exec kanshi
 exec gammastep -l 41.0:28.9 -t 6500:3500
+
 exec_always wl-paste --type text --watch cliphist store
 exec_always wl-paste --type image --watch cliphist store
-exec xhost +si:localuser:root
-exec dbus-update-activation-environment --all
-exec gnome-keyring-daemon --start --components=secrets
-exec export $(gnome-keyring-daemon)
-exec gentoo-pipewire-launcher restart &
-exec ~/.local/bin/mail-sync.sh
-xwayland enable
+exec xrdb -merge ~/.Xresources
 seat seat0 xcursor_theme "Chameleon-Pearl-Regular-0.5" 24
 
+exec xhost +si:localuser:root
+exec ~/.local/bin/mail-sync.sh
+xwayland enable
+
 exec_always {
+    gsettings set org.gnome.desktop.interface enable-animations true
     gsettings set org.gnome.desktop.interface cursor-theme 'Chameleon-Pearl-Regular-0.5'
     gsettings set org.gnome.desktop.interface cursor-size 24
     gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'

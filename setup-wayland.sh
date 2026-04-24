@@ -159,6 +159,8 @@ REMOVE_LIST=(
     "$HOME/.local/bin/weather.sh"
     "$HOME/.local/bin/mail-sync.sh" "$HOME/.urlview"
     "$HOME/.config/oh-my-posh-theme.json"
+    "$HOME/.zprofile"
+    "$HOME/.config/borg-excludes.txt"
 )
 
 for item in "${REMOVE_LIST[@]}"; do
@@ -191,6 +193,7 @@ link_config "$DOTFILES_DIR/.tmux" "$HOME/.tmux"
 link_config "$DOTFILES_DIR/oh-my-posh-theme.json" "$HOME/.config/oh-my-posh-theme.json"
 link_config "$DOTFILES_DIR/.urlview" "$HOME/.urlview"
 link_config "$DOTFILES_DIR/borg-excludes.txt" "$HOME/.config/borg-excludes.txt"
+link_config "$DOTFILES_DIR/.zprofile" "$HOME/.zprofile"
 
 if [ -d "$DOTFILES_DIR/scripts" ]; then
     for script in "$DOTFILES_DIR/scripts"/*; do

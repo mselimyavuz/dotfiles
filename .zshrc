@@ -2,7 +2,6 @@ export ZSH="$HOME/.oh-my-zsh"
 export PATH="$PATH:/home/mselimyavuz/lilypond/bin/"
 export PATH="$PATH:/home/mselimyavuz/.cargo/bin"
 export PATH="$PATH:/home/mselimyavuz/.local/bin"
-export PATH="$HOME/.local/wine-9.21/bin:$PATH"
 export PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig:$PKG_CONFIG_PATH
 export LD_LIBRARY_PATH=/usr/local/lib64:$LD_LIBRARY_PATH
 export JUCE_DIR="$HOME/.local/lib/cmake/JUCE"
@@ -26,6 +25,7 @@ source $ZSH/oh-my-zsh.sh
 alias se='doas env XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state nvim'
 alias fix-phone='adb shell settings put global force_fsg_nav_bar 1 && adb shell settings put global hide_gesture_line 1'
 alias ls="eza --icons --git --group-directories-first"
+alias yabridge-sync='PATH="$HOME/opt/wine-9.21-staging-tkg-amd64-wow64/bin:$PATH" WINEPREFIX="$HOME/.wine-proaudio" yabridgectl sync'
 
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh-theme.json)"
 fastfetch
