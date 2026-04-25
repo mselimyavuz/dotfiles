@@ -15,11 +15,19 @@ set $mailclient $term -e  zsh -c "aerc"
 set $musicplayer $term zsh -c "~/.cargo/bin/termusic"
 set $launcher $term --app-id=app-launcher zsh -c "~/.local/bin/fzf-launcher.sh"
 
-set $laptop eDP-1
-set $monitor HDMI-A-1
+set $my_host $(hostname)
 
-output $monitor resolution 3840x2160@59.940Hz
 output * scale_filter smart
+
+exec_always [ "$HOSTNAME" = "msyavuz" ] && swaymsg 'output eDP-1 res 2880x1800@90.00Hz scale 1.35'
+exec_always [ "$HOSTNAME" != "msyavuz" ] && swaymsg 'output HDMI-A-1 res 3840x2160@59.940Hz'
+
+exec swayidle -w \
+    timeout 300 'brightnessctl -s set 10%' resume 'brightnessctl -r' \
+    timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+    timeout 900 'swaylock -f -c 000000' \
+    timeout 1200 'pcntl suspend' \
+    before-sleep 'swaylock -f -c 000000'
 
 set $bg			#1d2021
 set $fg			#ebdbb2
