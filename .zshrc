@@ -1,4 +1,25 @@
 export ZSH="$HOME/.oh-my-zsh"
+export PATH="$PATH:/home/mselimyavuz/lilypond/bin/"
+export PATH="$PATH:/home/mselimyavuz/.cargo/bin"
+export PATH="$PATH:/home/mselimyavuz/.local/bin"
+export PATH="$PATH:$HOME/dotfiles/scripts"
+export PATH="$PATH:$HOME/workspace/main/scripts"
+
+export LV2_PATH="$HOME/.lv2:/usr/local/lib64/lv2:/usr/lib64/lv2"
+export VST3_PATH="$HOME/.vst3:/usr/local/lib64/vst3:/usr/lib64/vst3"
+
+export PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig:$PKG_CONFIG_PATH
+export LD_LIBRARY_PATH=/usr/local/lib64:$LD_LIBRARY_PATH
+
+export JUCE_DIR="$HOME/.local/lib/cmake/JUCE"
+
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='nvim'
+else
+  export EDITOR='nvim'
+fi
+
+export VISUAL="$EDITOR"
 
 ZSH_THEME=""
 plugins=(git ssh-agent fzf zsh-autosuggestions zsh-syntax-highlighting)
