@@ -121,6 +121,37 @@ require('lazy').setup({
     })
   end,
 },
+{
+"nvim-neo-tree/neo-tree.nvim",
+  branch = "v3.x",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "nvim-tree/nvim-web-devicons", -- Requires a Nerd Font
+    "MunifTanjim/nui.nvim",
+  },
+  keys = {
+    { "<leader>e", ":Neotree toggle<CR>", desc = "Toggle NeoTree" },
+    { "<leader>be", ":Neotree buffers<CR>", desc = "NeoTree Buffers" },
+  },
+  opts = {
+    filesystem = {
+      filtered_items = {
+        visible = true, -- Show dotfiles by default
+        hide_dotfiles = false,
+        hide_gitignored = false,
+      },
+      follow_current_file = {
+        enabled = true, -- Focus the current file in the tree
+      },
+    },
+    window = {
+      width = 30,
+      mappings = {
+        ["<space>"] = "none", -- Disable space so it doesn't interfere with your leader
+      },
+    },
+  },
+  },
   { 'NotAShelf/direnv.nvim', config = true },
   {
     'folke/noice.nvim',
