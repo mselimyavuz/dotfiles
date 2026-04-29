@@ -4,3 +4,4 @@ termusic/playlist.log
 .surf/*
 !.surf/styles/
 !.surf/styles/default.css
+nvim/lazy-lock.json
