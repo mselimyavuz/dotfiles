@@ -5,7 +5,7 @@
     "margin-top": 5,
     "margin-left": 10,
     "margin-right": 10,
-    "modules-left": ["sway/mode", "sway/workspaces", "custom/weather", "group/music"],
+    "modules-left": ["sway/mode", "sway/workspaces", "sway/window", "custom/weather", "group/music"],
     "modules-center": ["clock"],
     "modules-right": ["tray", "pulseaudio", "network", "bluetooth", "backlight", "group/hardware", "custom/uptime", "battery", "idle_inhibitor"],
 
@@ -30,7 +30,15 @@
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
-
+"sway/window": {
+    "format": "[{title}]",
+    "max-length": 50,
+    "rewrite": {
+       "(.*) - LibreWolf": "󰈹 $1",
+       "(.*) - [foot]": " $1",
+       "(.*) - nvim": " $1"
+    }
+},
 "group/music": {
         "orientation": "horizontal",
         "modules": [
