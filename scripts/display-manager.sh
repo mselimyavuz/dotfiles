@@ -1,75 +1,60 @@
 #!/bin/zsh
 INTERNAL="eDP-1"
-EXTERNAL=$(xrandr --query | grep " connected" | grep -v "^$INTERNAL" | awk '{print $1}' | head -n 1)
+INT_SCALE="1.351562"
+
+# Get the external monitor name
+EXTERNAL=$(wlr-randr | grep -v "$INTERNAL" | grep -E '^[a-zA-Z0-9-]+' | awk '{print $1}' | head -n 1)
+
+# Debug: Print found monitor
+echo "Debug: Detected External as [$EXTERNAL]"
 
 if [[ -z "$EXTERNAL" ]]; then
-    xrandr --output "$INTERNAL" --auto --primary
+    echo "No external monitor found. Resetting internal."
+    wlr-randr --output "$INTERNAL" --on --scale "$INT_SCALE" --pos 0,0
     exit 0
 fi
 
-# --- Detect current state ---
-INTERNAL_STATE=$(xrandr --query | grep "^$INTERNAL" | grep -o "[0-9]*x[0-9]*+[0-9]*+[0-9]*" | head -n 1)
-EXTERNAL_STATE=$(xrandr --query | grep "^$EXTERNAL" | grep -o "[0-9]*x[0-9]*+[0-9]*+[0-9]*" | head -n 1)
+# Simplified Header
+HEADER="External Monitor: $EXTERNAL detected"
 
-if [[ -z "$INTERNAL_STATE" && -n "$EXTERNAL_STATE" ]]; then
-    CURRENT="External Only"
-elif [[ -n "$INTERNAL_STATE" && -z "$EXTERNAL_STATE" ]]; then
-    CURRENT="Laptop Only"
-elif [[ -n "$INTERNAL_STATE" && -n "$EXTERNAL_STATE" ]]; then
-    INT_X=$(echo "$INTERNAL_STATE" | grep -o "+[0-9]*+[0-9]*$" | cut -d+ -f2)
-    EXT_X=$(echo "$EXTERNAL_STATE" | grep -o "+[0-9]*+[0-9]*$" | cut -d+ -f2)
-    if [[ "$INT_X" -lt "$EXT_X" ]]; then
-        CURRENT="Extend: External to the Right"
-    elif [[ "$INT_X" -gt "$EXT_X" ]]; then
-        CURRENT="Extend: External to the Left"
-    else
-        CURRENT="Mirror"
-    fi
-else
-    CURRENT="Unknown"
-fi
-
-HEADER="Current: $CURRENT  |  Internal: ${INTERNAL_STATE:-off}  |  External: ${EXTERNAL_STATE:-off}"
-
-# --- Show menu ---
+# Show the menu
 selected=$(printf '%s\n' \
-    "Extend: External to the Right" \
-    "Extend: External to the Left" \
-    "Mirror: Same as Laptop" \
-    "External Only: Turn off Laptop" \
-    "Laptop Only: Turn off External" \
-    "HiDPI Fix: Scale External 1.5x" \
-    | fzf \
-    --reverse \
-    --header="$HEADER" \
-    --color="bg+:#3c3836,bg:#282828,spinner:#fb4934,hl:#928374,fg:#ebdbb2,header:#928374,info:#83a598,pointer:#fb4934,marker:#fabd2f,fg+:#ebdbb2,prompt:#fb4934,hl+:#fb4934" \
-    --prompt="Monitor λ " \
-    --border=none)
+    "Extend: Right" \
+    "Extend: Left" \
+    "Mirror" \
+    "External Only" \
+    "Laptop Only" \
+    | fzf --reverse --header="$HEADER")
 
-if [[ -z "$selected" ]]; then
-    exit 0
-fi
+[[ -z "$selected" ]] && exit 0
+
+echo "Selected: $selected"
 
 case "$selected" in
-    *"Right"*)
-        xrandr --output "$INTERNAL" --auto --primary --output "$EXTERNAL" --auto --right-of "$INTERNAL"
+    "Extend: Right")
+        # Logical width of eDP-1 is roughly 2131
+        wlr-randr --output "$INTERNAL" --on --pos 0,0 --scale "$INT_SCALE"
+        wlr-randr --output "$EXTERNAL" --on --pos 2131,0 --scale 1
         ;;
-    *"Left"*)
-        xrandr --output "$INTERNAL" --auto --primary --output "$EXTERNAL" --auto --left-of "$INTERNAL"
+    "Extend: Left")
+    # Force a state reset to prevent 'sticky' mirroring
+    wlr-randr --output "$EXTERNAL" --off
+    sleep 0.1
+    wlr-randr --output "$EXTERNAL" --on --pos 0,0 --scale 1
+    wlr-randr --output "$INTERNAL" --on --pos 1920,0 --scale "$INT_SCALE"
+    ;;
+    "Mirror")
+    # Reset both to be sure
+    wlr-randr --output "$INTERNAL" --on --pos 0,0 --scale "$INT_SCALE"
+    wlr-randr --output "$EXTERNAL" --on --pos 0,0 --scale 1 --mode 1920x1080
+    ;;
+    "External Only")
+        # Turn off internal FIRST
+        wlr-randr --output "$INTERNAL" --off
+        wlr-randr --output "$EXTERNAL" --on --pos 0,0 --scale 1
         ;;
-    *"Mirror"*)
-        xrandr --output "$INTERNAL" --auto --output "$EXTERNAL" --auto --same-as "$INTERNAL"
-        ;;
-    *"External Only"*)
-        xrandr --output "$INTERNAL" --off --output "$EXTERNAL" --auto --primary
-        ;;
-    *"Laptop Only"*)
-        xrandr --output "$EXTERNAL" --off --output "$INTERNAL" --auto --primary
-        ;;
-    *"HiDPI Fix"*)
-        xrandr --output "$INTERNAL" --auto --primary --output "$EXTERNAL" --auto --scale 1.5x1.5 --right-of "$INTERNAL"
+    "Laptop Only")
+        wlr-randr --output "$EXTERNAL" --off
+        wlr-randr --output "$INTERNAL" --on --pos 0,0 --scale "$INT_SCALE"
         ;;
 esac
-
-~/.local/bin/polybar-launch.sh &
-
