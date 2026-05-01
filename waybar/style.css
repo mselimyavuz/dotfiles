@@ -79,7 +79,7 @@ window#waybar {
  * ----------------------------------------------------------------------------- */
 
 /* Unified styling for all Pill-style modules */
-#mode, #clock, #battery, #network,
+#mode, #window, #clock, #battery, #network,
 #pulseaudio, #backlight, #disk, #custom-uptime, #custom-updates,
 #custom-weather, #custom-playerctl, #tray, #idle_inhibitor, #mpd, #bluetooth {
     background-color: @background-light;
@@ -113,6 +113,10 @@ window#waybar {
 /* MODE: Sway resizing/swapping */
 #mode {
     background-color: @gentoo-purple;
+    color: @gentoo-light;
+    font-weight: bold;
+}
+#window {
     color: @gentoo-light;
     font-weight: bold;
 }
