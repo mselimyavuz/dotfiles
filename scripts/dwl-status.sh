@@ -40,8 +40,8 @@ get_zram() {
 }
 
 get_temp() {
-    local cpu=$(cat /sys/class/hwmon/hwmon6/temp1_input 2>/dev/null)
-    local gpu=$(cat /sys/class/hwmon/hwmon6/temp2_input 2>/dev/null)
+    local cpu=$(cat /sys/class/hwmon/hwmon5/temp1_input 2>/dev/null)
+    local gpu=$(cat /sys/class/hwmon/hwmon5/temp2_input 2>/dev/null)
     local cpu_f=$(awk -v t="$cpu" 'BEGIN {if (t>0) printf "%.0f°C", t/1000; else print "N/A"}')
     local gpu_f=$(awk -v t="$gpu" 'BEGIN {if (t>0) printf "%.0f°C", t/1000; else print "RC6"}')
     echo " $cpu_f 󰢮 $gpu_f"
