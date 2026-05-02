@@ -17,40 +17,13 @@ dev-libs/leancrypto -asm
 >=dev-libs/libxmlb-0.3.24-r1 introspection
 >=dev-ml/lablgtk-3.1.5-r2 sourceview
 dev-mobilephone/heimdall gui
->=dev-python/distro-1.9.0 python_targets_python3_12
->=dev-python/docutils-0.22.4 python_targets_python3_12
->=dev-python/editables-0.5 python_targets_python3_12
->=dev-python/flit-core-3.12.0 python_targets_python3_12
->=dev-python/gpep517-19 python_targets_python3_12
->=dev-python/hatch-vcs-0.5.0 python_targets_python3_12
->=dev-python/hatchling-1.29.0 python_targets_python3_12
->=dev-python/installer-0.7.0 python_targets_python3_12
->=dev-python/jaraco-collections-5.2.1 python_targets_python3_12
->=dev-python/jaraco-context-6.0.1-r1 python_targets_python3_12
->=dev-python/jaraco-functools-4.3.0 python_targets_python3_12
->=dev-python/jaraco-text-4.0.0 python_targets_python3_12
->=dev-python/more-itertools-10.8.0 python_targets_python3_12
->=dev-python/olefile-0.47 python_targets_python3_12
->=dev-python/packaging-25.0 python_targets_python3_12
->=dev-python/pathspec-1.0.4 python_targets_python3_12
->=dev-python/pillow-12.2.0 python_targets_python3_12
->=dev-python/platformdirs-4.5.0 python_targets_python3_12
->=dev-python/pluggy-1.6.0 python_targets_python3_12
->=dev-python/pybind11-3.0.3 python_targets_python3_12
->=dev-python/pycairo-1.29.0-r1 python_targets_python3_12
->=dev-python/pygments-2.19.2 python_targets_python3_12
->=dev-python/pygobject-3.50.1 python_targets_python3_12
->=dev-python/pyproject-metadata-0.11.0 python_targets_python3_12
 dev-python/pyqt6 webchannel
 >=dev-python/pyqt6-6.9.1 pdfium
->=dev-python/pyside-6.10.1 -python_targets_python3_13 python_single_target_python3_12 python_targets_python3_12 uitools
+>=dev-python/pyqt6-6.10.2 quick
+>=dev-python/pyqt6-webengine-6.10.0 quick
+>=dev-python/python-lsp-server-1.14.0 all-plugins
 >=dev-python/qtpy-2.4.3-r1 printsupport
->=dev-python/scikit-build-core-0.12.2 python_targets_python3_12
->=dev-python/setuptools-80.9.0-r1 python_targets_python3_12
->=dev-python/setuptools-scm-9.2.2 python_targets_python3_12
->=dev-python/trove-classifiers-2025.11.14.15 python_targets_python3_12
->=dev-python/vcs-versioning-1.0.1 python_targets_python3_12
->=dev-python/wheel-0.45.1 python_targets_python3_12
+>=dev-python/qtpy-2.4.3-r2 quick webengine
 dev-qt/qtbase mysql
 >=dev-qt/qtpositioning-6.9.3 geoclue
 >=gui-apps/swaybg-1.2.1 gdk-pixbuf
@@ -66,6 +39,7 @@ media-libs/juce -examples extras
 media-libs/libcamera drm elfutils gstreamer tools v4l
 >=media-libs/libpng-1.6.55 apng
 >=media-libs/libvpx-1.15.2 postproc
+media-libs/mesa wayland
 media-libs/opus custom-modes
 media-plugins/alsa-plugins pulseaudio
 media-plugins/gst-plugins-meta -jack
@@ -77,6 +51,7 @@ media-sound/puredata alsa fftw
 media-video/ffmpeg cdio encode fdk lame lv2 nvenc postproc samba threads v4l
 media-video/ffmpeg-compat cuda nvenc
 media-video/pipewire -jack-client -modemmanager extra ffmpeg fftw gstreamer jack-sdk libcamera liblc3 lv2 pipewire-alsa sound-server v4l
+net-dns/avahi python
 >=net-dns/dnsmasq-2.91 script
 net-fs/samba gnutls
 net-libs/gnutls -post-quantum pkcs11 tools
@@ -85,19 +60,13 @@ net-libs/nodejs npm
 net-misc/netifrc -dhcp
 net-misc/networkmanager -bluetooth -modemmanager iwd
 >=net-misc/spice-gtk-0.42-r4 usbredir
-net-print/hplip -python_single_target_python3_14 hpcups hpijs python_single_target_python3_13 qt5 scanner snmp static-ppds
+net-print/hplip scanner snmp static-ppds
 sci-libs/fftw threads
 sci-libs/libqalculate gnuplot
 sys-apps/fwupd amt bluetooth flashrom gnutls gusb introspection man modern-supported nvme synaptics thunderbolt tpm uefi
 sys-auth/seatd builtin server
->=sys-boot/grub-2.14_rc1-r3 mount
 sys-devel/binutils -debuginfod
 sys-kernel/installkernel dracut grub secureboot
-sys-kernel/linux-firmware savedconfig
 sys-libs/ncurses -gpm
-www-client/librewolf hwaccel pgo system-pipewire system-png
-www-client/surf savedconfig
-media-libs/mesa wayland
-x11-libs/gtk+:3 wayland
-net-dns/avahi python python_single_target_python3_13 -python_single_target_python3_14
 sys-libs/zlib minizip
+www-client/librewolf hwaccel pgo system-pipewire system-png
