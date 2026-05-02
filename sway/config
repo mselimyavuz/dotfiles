@@ -13,7 +13,7 @@ set $browser librewolf
 set $filemanager $term -e  zsh -c "ranger"
 set $mailclient $term -e  zsh -c "aerc"
 set $musicplayer $term zsh -c "~/.cargo/bin/termusic"
-set $launcher $term --app-id=app-launcher zsh -c "~/.local/bin/fzf-launcher.sh"
+# set $launcher $term --app-id=app-launcher zsh -c "~/.local/bin/fzf-launcher.sh"
 
 set $my_host $(hostname)
 
@@ -127,7 +127,8 @@ bindsym $mod+w exec $browser
 bindsym $mod+n exec $filemanager
 bindsym $mod+m exec $mailclient
 bindsym $mod+t exec $musicplayer
-bindsym $mod+d exec $launcher
+# bindsym $mod+d exec $launcher
+bindsym $mod+d exec --no-startup-id ~/.local/bin/dmenu-launch
 
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+c reload
