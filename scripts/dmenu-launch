@@ -17,13 +17,13 @@ build_cache() {
 [[ ! -f "$CACHE_FILE" ]] && build_cache
 
 selected=$(echo -e "↺ Refresh Cache\n$(cat "$CACHE_FILE")" | dmenu -i -p "λ " \
-    -fn "IosevkaTerm Nerd Font:size=10" -nb "#282828" -nf "#ebdbb2" -sb "#fb4934" -sf "#282828")
+    -fn "IosevkaTerm Nerd Font:size=14" -nb "#282828" -nf "#ebdbb2" -sb "#fb4934" -sf "#282828")
 
 [[ -z "$selected" ]] && exit 0
 
 if [[ "$selected" == "↺ Refresh Cache" ]]; then
     build_cache
-    exec "$0" # Restart the script to show updated cache
+    exec "$0"
 else
     cmd=$(echo "$selected" | sed 's/.*(\(.*\))/\1/' | xargs)
     setsid $cmd &!
