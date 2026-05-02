@@ -1,0 +1,31 @@
+#!/bin/zsh
+CACHE_FILE="/tmp/dmenu_cache_$USER"
+
+build_cache() {
+    local execs=$(echo "$PATH" | tr ':' '\n' | while read dir; do
+        [[ -d "$dir" ]] && find "$dir" -maxdepth 1 -type f -executable 2>/dev/null
+    done | xargs -r -n1 basename | sort -u | awk '{print $1 " (" $1 ")"}')
+
+    local desktops=$(find /usr/share/applications ~/.local/share/applications -name "*.desktop" 2>/dev/null | xargs awk -F= '
+        /^Name=/ {name=$2} 
+        /^Exec=/ {exec=$2; if(name && exec) {gsub(/%[a-zA-Z]/, "", exec); print name " (" exec ")"}}
+    ' 2>/dev/null | sort -u)
+
+    echo -e "$execs\n$desktops" | sort -u > "$CACHE_FILE"
+}
+
+[[ ! -f "$CACHE_FILE" ]] && build_cache
+
+selected=$(echo -e "↺ Refresh Cache\n$(cat "$CACHE_FILE")" | dmenu -i -p "λ " \
+    -fn "IosevkaTerm Nerd Font:size=10" -nb "#282828" -nf "#ebdbb2" -sb "#fb4934" -sf "#282828")
+
+[[ -z "$selected" ]] && exit 0
+
+if [[ "$selected" == "↺ Refresh Cache" ]]; then
+    build_cache
+    exec "$0" # Restart the script to show updated cache
+else
+    cmd=$(echo "$selected" | sed 's/.*(\(.*\))/\1/' | xargs)
+    setsid $cmd &!
+fi
+

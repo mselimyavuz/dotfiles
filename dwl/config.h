@@ -99,8 +99,8 @@ static const char *browser[]      = { "librewolf", NULL };
 static const char *filemanager[]  = { "foot", "-e", "ranger", NULL };
 static const char *mailclient[]   = { "foot", "-e", "aerc", NULL };
 static const char *musicplayer[]  = { "foot", "zsh", "-c", "~/.cargo/bin/termusic", NULL };
-static const char *launcher[]     = { "foot", "--app-id=app-launcher", "zsh", "-c", "~/.local/bin/fzf-launcher.sh", NULL };
-static const char *displaymgr[] = { "foot", "--app-id=app-launcher", "zsh", "-c", "~/.local/bin/display-manager.sh", NULL };
+static const char *launcher[]     = { "dm-launch", NULL };
+static const char *displaymgr[]   = { "foot", "--app-id=app-launcher", "zsh", "-c", "~/.local/bin/display-manager.sh", NULL };
 
 /* Hardware Control */
 static const char *mutecmd[]      = { "pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle", NULL };
