@@ -10,13 +10,13 @@ export GDK_BACKEND="wayland,x11"
 # --- Theme & Aesthetics ---
 export GTK_THEME="Adwaita:dark"
 export ADW_DISABLE_PORTAL=1
+export QT_QPA_PLATFORM="wayland"
+export QT_QPA_PLATFORMTHEME="qt5ct"
 
 # --- Hardware & WM Specific Overrides ---
 if [[ "$(hostname)" == "selim-desktop" ]]; then
     export XDG_CURRENT_DESKTOP=sway
-    export QT_QPA_PLATFORM="wayland"
-    export QT_QPA_PLATFORMTHEME="qt5ct"
-    
+   
     # NVIDIA Specifics
     export WLR_NO_HARDWARE_CURSORS=1
     export GBM_BACKEND=nvidia-drm
