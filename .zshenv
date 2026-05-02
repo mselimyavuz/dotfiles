@@ -6,6 +6,8 @@ export CLUTTER_BACKEND=wayland
 export _JAVA_AWT_WM_NONREPARENTING=1
 export ELECTRON_OZONE_PLATFORM_HINT="auto"
 export GDK_BACKEND="wayland,x11"
+export QT_QPA_PLATFORM="wayland;xcb"
+
 
 # --- Theme & Aesthetics ---
 export GTK_THEME="Adwaita:dark"
@@ -24,7 +26,6 @@ if [[ "$(hostname)" == "selim-desktop" ]]; then
 else
     # ThinkPad X1 Carbon (dwl / Intel)
     export XDG_CURRENT_DESKTOP=wlroots
-    export QT_QPA_PLATFORM="wayland;xcb"
 
     unset GBM_BACKEND
     unset __GLX_VENDOR_LIBRARY_NAME
