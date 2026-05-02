@@ -1,0 +1,41 @@
+# Camera / IPU6 patches
+https://lore.kernel.org/linux-media/?q=ov9234&x=A "~OV9234 driver patches"
+https://lore.kernel.org/linux-media/?q=OVTI9234&x=A "~OVTI9234 sensor patches"
+https://lore.kernel.org/linux-media/?q=hansdegoede&x=A "~Hans de Goede"
+https://lore.kernel.org/linux-media/?q=ipu6+ljca&x=A "~IPU6 LJCA patches"
+https://lore.kernel.org/linux-media/?q=intel-ipu6&x=A "~Intel IPU6 general"
+
+# Kernel - hardware relevant to X1 Carbon Gen 11
+https://lore.kernel.org/platform-driver-x86/?q=thinkpad&x=A "~ThinkPad platform patches"
+https://lore.kernel.org/linux-input/?q=thinkpad&x=A "~ThinkPad input patches"
+https://lore.kernel.org/intel-gfx/?x=A "~Intel graphics"
+https://lore.kernel.org/linux-wireless/?q=iwlwifi&x=A "~iwlwifi wireless patches"
+
+# Gentoo
+https://www.gentoo.org/feeds/news.xml "~Gentoo news"
+https://blogs.gentoo.org/feed "~Gentoo blogs"
+https://packages.gentoo.org/packages/sys-kernel/gentoo-sources/feed "~gentoo-sources updates"
+
+# Suckless / dwl / wayland
+https://suckless.org/atom.xml "~Suckless news"
+https://lists.sr.ht/~kennylevinsen/dwl-devel?x=A "~dwl development"
+
+# Audio / Linux audio
+https://lore.kernel.org/alsa-devel/?x=A "~ALSA kernel patches"
+https://planet.linuxaudio.org/atom.xml "~Planet Linux Audio"
+https://lwn.net/headlines/newrss "~LWN kernel news"
+
+# Computational musicology / audio analysis
+https://transactions.ismir.net/feed "~TISMIR journal"
+https://archives.ismir.net/feed "~ISMIR proceedings"
+https://www.music-ir.org/mirex/wiki/index.php?title=Special:RecentChanges&feed=atom "~MIREX updates"
+
+# Audio software (relevant tools)
+https://github.com/aubio/aubio/releases.atom "~aubio releases"
+https://github.com/librosa/librosa/releases.atom "~librosa releases"
+https://github.com/MTG/essentia/releases.atom "~Essentia releases"
+
+# General kernel / open source
+https://lore.kernel.org/lkml/?q=thinkpad+x1&x=A "~LKML X1 Carbon"
+https://phoronix.com/rss.php "~Phoronix hardware/kernel news"
+
