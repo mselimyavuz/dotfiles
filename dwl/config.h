@@ -95,7 +95,8 @@ static const double accel_speed = 0.5;
 
 /* Commands */
 static const char *termcmd[]      = { "foot", NULL };
-static const char *browser[]      = { "/home/mselimyavuz/.local/bin/librewolf-akis", NULL };
+static const char *browser[]      = { "librewolf", NULL };
+static const char *librewolfcmd[] = { "/home/mselimyavuz/.local/bin/librewolf-akis", NULL };
 static const char *filemanager[]  = { "foot", "-e", "ranger", NULL };
 static const char *mailclient[]   = { "foot", "-e", "aerc", NULL };
 static const char *musicplayer[]  = { "foot", "zsh", "-c", "~/.cargo/bin/termusic", NULL };
@@ -140,6 +141,7 @@ static const Key keys[] = {
     { MODKEY,                    XKB_KEY_p,          spawn,          {.v = displaymgr} },
     { MODKEY,                    XKB_KEY_Return,     spawn,          {.v = termcmd} },
     { MODKEY,                    XKB_KEY_w,          spawn,          {.v = browser} },
+    { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_w,          spawn,          {.v = librewolfcmd} },
     { MODKEY,                    XKB_KEY_n,          spawn,          {.v = filemanager} },
     { MODKEY,                    XKB_KEY_m,          spawn,          {.v = mailclient} },
     { MODKEY,                    XKB_KEY_t,          spawn,          {.v = musicplayer} },
