@@ -95,7 +95,7 @@ static const double accel_speed = 0.5;
 
 /* Commands */
 static const char *termcmd[]      = { "foot", NULL };
-static const char *browser[]      = { "librewolf", NULL };
+static const char *browser[]      = { "/home/mselimyavuz/.local/bin/librewolf-akis", NULL };
 static const char *filemanager[]  = { "foot", "-e", "ranger", NULL };
 static const char *mailclient[]   = { "foot", "-e", "aerc", NULL };
 static const char *musicplayer[]  = { "foot", "zsh", "-c", "~/.cargo/bin/termusic", NULL };
