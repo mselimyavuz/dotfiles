@@ -9,7 +9,8 @@ set $right l
 
 set $term foot
 set $notifications mako
-set $browser librewolf
+set $libakis_fix LD_PRELOAD=/home/mselimyavuz/.local/lib/libakis_fix.so
+set $browser $libakis_fix librewolf
 set $filemanager $term -e  zsh -c "ranger"
 set $mailclient $term -e  zsh -c "aerc"
 set $musicplayer $term zsh -c "~/.cargo/bin/termusic"
