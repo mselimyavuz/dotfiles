@@ -9,7 +9,13 @@ WARN="#fabd2f"
 CRIT="#fb4934"
 
 get_disk_usage() {
-    df_output=$(df -h -P /dev/nvme0n1p3 2>/dev/null | awk 'NR==2{printf "%s/%s (%s)", $3, $2, $5}')
+    if [[ "$(hostname)" == "msyavuz" ]]; then
+        local drive="/dev/nvme0n1p2"
+    else
+        local drive="/dev/nvme0n1p3"
+    fi
+
+    df_output=$(df -h -P "$drive" 2>/dev/null | awk 'NR==2{printf "%s/%s (%s)", $3, $2, $5}')
     if [[ -n "$df_output" ]]; then
         echo "📊 $df_output"
     else
