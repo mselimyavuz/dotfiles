@@ -1,0 +1,5 @@
+#!/bin/sh
+export LD_PRELOAD="$HOME/.local/lib/libakis_fix.so"
+export GDK_BACKEND=x11
+export XDG_CURRENT_DESKTOP=GNOME
+exec librewolf "$@"
