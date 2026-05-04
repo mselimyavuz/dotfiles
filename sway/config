@@ -9,12 +9,12 @@ set $right l
 
 set $term foot
 set $notifications mako
+set $browser librewolf
 set $libakis_fix LD_PRELOAD=/home/mselimyavuz/.local/lib/libakis_fix.so
-set $browser $libakis_fix librewolf
+set $browser_imza $libakis_fix librewolf
 set $filemanager $term -e  zsh -c "ranger"
 set $mailclient $term -e  zsh -c "aerc"
 set $musicplayer $term zsh -c "~/.cargo/bin/termusic"
-# set $launcher $term --app-id=app-launcher zsh -c "~/.local/bin/fzf-launcher.sh"
 
 set $my_host $(hostname)
 
@@ -22,12 +22,6 @@ output * scale_filter smart
 
 exec_always [ "$HOSTNAME" = "msyavuz" ] && swaymsg 'output eDP-1 res 2880x1800@90.00Hz scale 1.35'
 exec_always [ "$HOSTNAME" != "msyavuz" ] && swaymsg 'output HDMI-A-1 res 3840x2160@59.940Hz'
-
-# exec swayidle -w \
-#    timeout 300 'brightnessctl -s set 30%' resume 'brightnessctl -r' \
-#    timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-#    timeout 900 'swaylock -f -c 000000' \
-#    before-sleep 'swaylock -f -c 000000'
 
 set $bg			#1d2021
 set $fg			#ebdbb2
@@ -125,10 +119,10 @@ input type:keyboard {
 
 bindsym $mod+Return exec $term
 bindsym $mod+w exec $browser
+bindsym $mod+Shift+w exec $browser_imza
 bindsym $mod+n exec $filemanager
 bindsym $mod+m exec $mailclient
 bindsym $mod+t exec $musicplayer
-# bindsym $mod+d exec $launcher
 bindsym $mod+d exec --no-startup-id ~/.local/bin/dmenu-launch
 
 bindsym $mod+Shift+q kill
@@ -145,27 +139,23 @@ bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 
-bindsym $mod+1 workspace number 1
-bindsym $mod+2 workspace number 2
-bindsym $mod+3 workspace number 3
-bindsym $mod+4 workspace number 4
-bindsym $mod+5 workspace number 5
-bindsym $mod+6 workspace number 6
-bindsym $mod+7 workspace number 7
-bindsym $mod+8 workspace number 8
-bindsym $mod+9 workspace number 9
-bindsym $mod+0 workspace number 10
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
 
-bindsym $mod+Shift+1 move container to workspace number 1
-bindsym $mod+Shift+2 move container to workspace number 2
-bindsym $mod+Shift+3 move container to workspace number 3
-bindsym $mod+Shift+4 move container to workspace number 4
-bindsym $mod+Shift+5 move container to workspace number 5
-bindsym $mod+Shift+6 move container to workspace number 6
-bindsym $mod+Shift+7 move container to workspace number 7
-bindsym $mod+Shift+8 move container to workspace number 8
-bindsym $mod+Shift+9 move container to workspace number 9
-bindsym $mod+Shift+0 move container to workspace number 10
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
 
 bindsym $mod+minus splitv
 bindsym $mod+Shift+backslash splith
